@@ -1,0 +1,75 @@
+{% load static %}
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<nav style="font-family: ubuntu;">
+  <div class="nav-wrapper" style="background-color: #333;">
+    <a href="#!" class="brand-logo center">Home</a>
+    <ul class="left hide-on-med-and-down">
+      <li><a href="sass.html">Patient List</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li class="active"><a href="collapsible.html">About us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<br/>
+        <table class="centered" id="datatable" style="font-family: ubuntu;">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Address</th>
+              <th>DOB</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                {% for patient in page_obj %}
+                <tr>
+                    <td>{{patient.first_name}}</td>
+                    <td>{{patient.last_name}}</td>
+                    <td>{{patient.mail}}</td>
+                    <td>{{patient.gender}}</td>
+                    <td>{{patient.address}}</td>
+                    <td>{{patient.dob}}</td>
+                    <td><b>{{patient.prediction_result}}</b></td>
+                </tr>
+             {% endfor %}
+            </tr>
+
+          </tbody>
+        </table>
+    
+        <footer class="page-footer" style="background-color: #333; font-family:ubuntu;">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Cancer Prediction</h5>
+                <p class="grey-text text-lighten-4">This system properly diagnose Female patients of breast cancer.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">GitHub</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Linkdeln</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Gmail</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2021 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+      </footer>
+
+
+      
+  

@@ -1,0 +1,12 @@
+body{
+  background-color: #525252;
+font-family:ubuntu;
+}
+.form-container {
+ width:85vw;
+height:auto;
+margin:0 auto;
+}
+.card-title {
+text-align:center;
+}

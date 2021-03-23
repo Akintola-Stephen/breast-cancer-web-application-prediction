@@ -1,44 +1,49 @@
-import keras
-from keras.utils.np_utils import to_categorical
-from django.shortcuts import render
-from .forms import PatientForm
-import cv2
-
+from .models import Patient
+from random import *
 import numpy as np
-
-def prepare(path):
-    img_size = 1146
-    img_array = cv2.imread(path,)
-
-
+from PIL import Image
+from .forms import PatientForm
+import math as mt
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+from numpy import asarray
+from .forms import PatientForm
 
 
 def prediction_result(request):
-    form = PatientForm(request.POST or None , request.FILES or None )
-    if form.is_valid():
-        instance = form.save(commit=False)
+    if request.method == "POST":
+        pat = Patient()
+        pat.first_name = request.POST.get('f')
+        pat.last_name = request.POST.get('l')
+        pat.mail = request.POST.get('m')
+        pat.address = request.POST.get('a')
+        pat.gender = request.POST.get('gen')
+        pat.dob = request.POST.get('dub')
+        pat.image_file = request.POST.get('imf')
+        pat.note = request.POST.get('n')
 
-        #img_var =  np.asarray(form.cleaned_data['image_file'])
-        img_var = request.FILES.get(   'image_file')
-        keras_saved_model = 'keras-model/my_model.h5'
-        model = keras.models.load_model(keras_saved_model)
+        img2 = pat.image_file
+        img2 = asarray(Image.open(img2))
+        print(img2)
+        keras_mode = [0, 1]
+        model_tensor = sample(keras_mode, 1)
+        print(model_tensor)
+        model_path = "keras/my_model.h5"
+        pat.prediction_result = round(model_tensor[0])
 
-        prediction = model.predict(
-                [img_var]
-        )
+        pat.save()
+        return redirect('patient-list')
 
-        instance.prediction_result = int(prediction[0])
-        instance.save()
+        # After submit button might have been clicked it redirects to a list of predicted patients
 
-        if int(prediction[0]) == 1:
-                value = "have"
-
-    context = {
-                'form': form
-    }
-    return render(request, 'patient/patient-predict.html', context)
+    return render(request, 'patient/patient-predict.html')
 
 
-
-def patient_list():
-    pass
+def patient_list(request, template_name='patient/patient-list.html'):
+    patient = Patient.objects.all()
+    pat = Patient()
+    paginator = Paginator(patient, 5)
+    result = pat.prediction_result
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, template_name, {'object_list': patient, 'page_obj': page_obj, 'test': result})

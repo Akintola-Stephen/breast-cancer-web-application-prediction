@@ -1,1 +1,106 @@
-<html>{% load static %}<head><link rel="stylesheet" href="{% static 'css/log_sign.css' %}"><meta charset="UTF-8"><title>Upload Images</title></head><body style = "font-family:ubuntu;"><heade>	<p>		Created by <i class="fa fa-heart"></i>		<a target="_blank" href="https://florin-pop.com">Akintola Stephen</a>	</p></heade><form enctype="multipart/form-data"   method="POST" action=".">    {% csrf_token %}    {{ form.as_p }}    <button type="submit"  value="Upload">Diagnose</button>   <!-- <input  type="submit" value="Upload"/>   --></form><footer>	<p>		Created by <i class="fa fa-heart"></i>		<a target="_blank" href="https://florin-pop.com">Akintola Stephen</a>	</p></footer></body><script src="{% static 'js/log_sign.js' %}"></script></html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<body>
+<nav style="font-family: ubuntu;">
+  <div class="nav-wrapper" style="background-color: #333;">
+    <a href="#!" class="brand-logo center">Home</a>
+    <ul class="left hide-on-med-and-down">
+      <li><a href="sass.html">Patient List</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li class="active"><a href="collapsible.html">About us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="card blue-grey darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">Patient registration and diagnosis details</span>
+        <div class="row">
+          <form method="POST" action=".">
+            {% csrf_token %}
+            <label for = "fname">First Name</label>
+            <input id="fname" type="text" name="f" />
+
+            <label for = "fname">Last Name</label>
+            <input id="lname" type="text" name="l" />
+
+            <label for = "mai">Mail</label>
+            <input id="mai" type="text" name="m" />
+
+            <label for = "addr">Address</label>
+            <input id="addr" type="text" name="a" />
+
+            <label for = "gen">Gender</label>
+            <input id="gen" type="text" name="gen" />
+
+            <!-- Date of birth -->
+            <input type="date" name="dub" />
+
+            <label for = "no">Note</label>
+            <input id="no" type="text" name="n" />
+
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Breast Image Upload</span>
+                <input type="file" name="imf">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+            <br/>
+
+            <button class="btn waves-effect waves-light" type="submit">Submit
+              <i class="material-icons right"></i>
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer class="page-footer" style="background-color: #333; font-family:ubuntu;">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Cancer Prediction</h5>
+          <p class="grey-text text-lighten-4">This system properly diagnose Female patients of breast cancer.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="#!">GitHub</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Linkdeln</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Gmail</a></li>
+            <li><a class="grey-text text-lighten-3" href="#!">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2021 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
+
+
+</body>
+        
